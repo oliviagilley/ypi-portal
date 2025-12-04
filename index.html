@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Auto - You Pick It Out Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="progress mb-4">
+            <div class="progress-bar" role="progressbar" style="width: 0%" id="progress-bar"></div>
+        </div>
+
+        <!-- Step 1: Vehicle Selection -->
+        <div class="step" id="step1">
+            <h2 class="mb-4">Step 1: Pick Your Dream Car</h2>
+            <div class="row" id="vehicle-grid">
+                <!-- Vehicle cards will be loaded here -->
+                <div class="col-md-4 mb-4">
+                    <div class="card vehicle-card" data-vehicle-id="1">
+                        <img src="https://via.placeholder.com/300x200?text=Car+1" class="card-img-top" alt="Vehicle 1">
+                        <div class="card-body">
+                            <h5 class="card-title">2023 Honda Civic</h5>
+                            <p class="card-text">Starting at $23,950</p>
+                            <button class="btn btn-outline-primary select-vehicle">Select</button>
+                            <button class="btn btn-outline-secondary favorite-vehicle" style="display: none;">⭐ Favorite</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- More vehicle placeholders -->
+            </div>
+            <div class="mt-4">
+                <button class="btn btn-primary" id="to-step-2" disabled>Next: Payment Options</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Payment Options -->
+        <div class="step d-none" id="step2">
+            <h2 class="mb-4">Step 2: Choose Your Monthly Payment</h2>
+            <div class="card p-4">
+                <div class="mb-3">
+                    <label for="monthly-payment" class="form-label">What's your ideal monthly payment?</label>
+                    <div class="d-flex align-items-center">
+                        <span class="me-2">$</span>
+                        <input type="range" class="form-range flex-grow-1 me-3" min="200" max="1000" step="10" id="monthly-payment" value="400">
+                        <input type="number" class="form-control w-25" id="payment-amount" value="400" min="200">
+                    </div>
+                    <div class="form-text">
+                        <p class="mt-2">💡 <strong>Not sure?</strong> Most customers choose between $400-$500/month.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 d-flex justify-content-between">
+                <button class="btn btn-outline-secondary" id="back-to-1">Back</button>
+                <button class="btn btn-primary" id="to-step-3">Next: Down Payment</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Down Payment -->
+        <div class="step d-none" id="step3">
+            <h2 class="mb-4">Step 3: Down Payment</h2>
+            <div class="card p-4">
+                <div class="mb-3">
+                    <label for="down-payment" class="form-label">Down Payment Amount (Optional)</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="down-payment" placeholder="0">
+                    </div>
+                    <div class="form-text">
+                        <p>💡 <strong>Helpful Tip:</strong> Most customers put down $1,000-$2,000 to cover taxes and title fees, but we work with any amount - even $0 down!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 d-flex justify-content-between">
+                <button class="btn btn-outline-secondary" id="back-to-2">Back</button>
+                <button class="btn btn-primary" id="to-step-4">Next: Personal Information</button>
+            </div>
+        </div>
+
+        <!-- Step 4: Personal Information -->
+        <div class="step d-none" id="step4">
+            <h2 class="mb-4">Step 4: Personal Information</h2>
+            <div class="card p-4">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="first-name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="first-name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="last-name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last-name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" required>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 d-flex justify-content-between">
+                <button class="btn btn-outline-secondary" id="back-to-3">Back</button>
+                <button class="btn btn-primary" id="to-step-5">Next: Address Information</button>
+            </div>
+        </div>
+
+        <!-- Step 5: Address Information -->
+        <div class="step d-none" id="step5">
+            <h2 class="mb-4">Step 5: Address Information</h2>
+            <div class="card p-4">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label for="street-address" class="form-label">Street Address</label>
+                        <input type="text" class="form-control" id="street-address" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" class="form-control" id="city" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="state" class="form-label">State</label>
+                        <select class="form-select" id="state" required>
+                            <option value="">Select...</option>
+                            <!-- States will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="zip" class="form-label">ZIP Code</label>
+                        <input type="text" class="form-control" id="zip" required>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="lived-less-than-2-years">
+                            <label class="form-check-label" for="lived-less-than-2-years">
+                                I've lived at this address for less than 2 years
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 d-flex justify-content-between">
+                <button class="btn btn-outline-secondary" id="back-to-4">Back</button>
+                <button class="btn btn-primary" id="to-step-6">Next: Employment Information</button>
+            </div>
+        </div>
+
+        <!-- Step 6: Employment Information -->
+        <div class="step d-none" id="step6">
+            <h2 class="mb-4">Step 6: Employment Information</h2>
+            <div class="card p-4">
+                <div class="mb-3">
+                    <label class="form-label">Employment Status</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="employment-status" id="employed" value="employed" checked>
+                        <label class="form-check-label" for="employed">Employed</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="employment-status" id="self-employed" value="self-employed">
+                        <label class="form-check-label" for="self-employed">Self-Employed</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="employment-status" id="retired" value="retired">
+                        <label class="form-check-label" for="retired">Retired</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="employment-status" id="other-income" value="other-income">
+                        <label class="form-check-label" for="other-income">Other Income Source</label>
+                    </div>
+                </div>
+                
+                <div id="employment-details">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="employer" class="form-label">Employer Name</label>
+                            <input type="text" class="form-control" id="employer">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="job-title" class="form-label">Job Title</label>
+                            <input type="text" class="form-control" id="job-title">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="monthly-income" class="form-label">Monthly Income ($)</label>
+                            <input type="number" class="form-control" id="monthly-income">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="employment-years" class="form-label">Years at Current Job</label>
+                            <input type="number" class="form-control" id="employment-years" min="0" step="0.5">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 d-flex justify-content-between">
+                <button class="btn btn-outline-secondary" id="back-to-5">Back</button>
+                <button class="btn btn-primary" id="to-step-7">Next: Protection Options</button>
+            </div>
+        </div>
+
+        <!-- Step 7: Protection Options -->
+        <div class="step d-none" id="step7">
+            <h2 class="mb-4">Step 7: Protect Your Investment</h2>
+            <div class="card p-4 mb-4">
+                <div class="mb-4">
+                    <h5>Extended Warranty</h5>
+                    <div class="form-check form-switch mb-2">
+                        <input class="form-check-input" type="checkbox" id="extended-warranty" data-monthly-cost="49">
+                        <label class="form-check-label" for="extended-warranty">
+                            Add Extended Warranty (+$49/month)
+                        </label>
+                        <div class="form-text">Peace of mind with comprehensive coverage for unexpected repairs.</div>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h5>GAP Coverage</h5>
+                    <div class="form-check form-switch mb-2">
+                        <input class="form-check-input" type="checkbox" id="gap-coverage" data-monthly-cost="25" checked>
+                        <label class="form-check-label" for="gap-coverage">
+                            Add GAP Coverage (+$25/month)
+                        </label>
+                        <div class="form-text">Covers the difference between what you owe and your car's value if it's totaled.</div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info">
+                    <h6>Your Estimated Monthly Payment:</h6>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>Base Payment:</span>
+                        <span id="base-payment-amount">$0</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>With Selected Protections:</span>
+                        <span id="total-payment-amount">$0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-outline-secondary" id="back-to-6">Back</button>
+                <button class="btn btn-success" id="submit-application">Submit Application</button>
+            </div>
+        </div>
+
+        <!-- Thank You Screen -->
+        <div class="step d-none text-center py-5" id="thank-you">
+            <div class="checkmark">✓</div>
+            <h2 class="mt-4">Thank You!</h2>
+            <p class="lead">Your application has been submitted successfully.</p>
+            <p>One of our representatives will contact you shortly to discuss the next steps.</p>
+            <a href="index.html" class="btn btn-primary mt-3">Return to Home</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
