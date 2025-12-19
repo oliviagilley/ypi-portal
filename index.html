@@ -8,7 +8,33 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="landing-page" id="landing-page">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6">
+                <div class="text-content">
+                    <h1 class="main-title">The You Pick it Out Portal <sup>TM</sup></h1>
+                    <p class="subtitle">The easiest way to buy a car, only at Direct Auto!</p>
+                    <div class="mt-5">
+                        <h2 class="question">Do you want to make payments?</h2>
+                        <div class="mt-4">
+                            <button class="btn btn-primary-custom" id="start-application">YES! -></button>
+                            <button class="btn btn-secondary-custom" id="other-options">OTHER OPTIONS -></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="logo-section">
+                    <img src="C:\Users\direc\Downloads\NEW DA LOGO.png" alt="Direct Auto Logo" class="logo-img">
+                </div>
+            </div>
+        </div>
+        <div class="cars-section">
+            <img src="C:\Users\direc\Downloads\cars.png" alt="Our Vehicle Selection" class="cars-img">
+        </div>
+    </div>
+
+    <div class="container mt-5 d-none" id="application-container">
         <div class="progress mb-4">
             <div class="progress-bar" role="progressbar" style="width: 0%" id="progress-bar"></div>
         </div>

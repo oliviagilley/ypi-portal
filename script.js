@@ -32,6 +32,10 @@ function init() {
 
 // Set up event listeners
 function setupEventListeners() {
+    // Landing page buttons
+    document.getElementById('start-application').addEventListener('click', startApplication);
+    document.getElementById('other-options').addEventListener('click', showOtherOptions);
+    
     // Navigation buttons
     document.getElementById('to-step-2').addEventListener('click', () => navigateTo(2));
     document.getElementById('to-step-3').addEventListener('click', () => navigateTo(3));
@@ -382,6 +386,19 @@ function submitApplication() {
     // Update progress bar to 100%
     progressBar.style.width = '100%';
     progressBar.setAttribute('aria-valuenow', 100);
+}
+
+// Start the application (from landing page)
+function startApplication() {
+    document.getElementById('landing-page').classList.add('d-none');
+    document.getElementById('application-container').classList.remove('d-none');
+    currentStep = 1;
+    navigateTo(1);
+}
+
+// Show other options (placeholder for now)
+function showOtherOptions() {
+    alert('Other options coming soon! For now, please click "YES!" to continue with the application.');
 }
 
 // Initialize the application when the DOM is loaded

@@ -12,6 +12,102 @@ body {
     background-color: var(--light-bg);
     color: #333;
     line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Landing Page Styles */
+.landing-page {
+    background-color: #000000;
+    color: white;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.text-content {
+    padding: 2rem;
+}
+
+.main-title {
+    color: #15D0FF;
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.main-title sup {
+    font-size: 1.5rem;
+    vertical-align: super;
+}
+
+.subtitle {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.question {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.btn-primary-custom, .btn-secondary-custom {
+    background-color: transparent;
+    border: 2px solid #15D0FF;
+    color: #15D0FF;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-primary-custom:hover, .btn-secondary-custom:hover {
+    background-color: #15D0FF;
+    color: #000000;
+    transform: scale(1.05);
+}
+
+.logo-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 2rem;
+}
+
+.logo-img {
+    max-height: 400px;
+    width: auto;
+    object-fit: contain;
+}
+
+.cars-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.cars-img {
+    max-width: 100%;
+    height: auto;
+    opacity: 0.9;
+}
+
+/* Application Container (hidden by default) */
+#application-container {
+    background-color: var(--light-bg);
 }
 
 /* Header & Progress Bar */
