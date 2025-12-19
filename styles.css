@@ -18,11 +18,18 @@ body {
 
 /* Landing Page Styles */
 .landing-page {
-    background-color: #000000;
-    color: white;
+    background-color: #000000 !important;
+    color: white !important;
     min-height: 100vh;
     position: relative;
     overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+.landing-page .container-fluid {
+    padding: 0;
+    margin: 0;
 }
 
 .text-content {
@@ -58,16 +65,19 @@ body {
 }
 
 .btn-primary-custom, .btn-secondary-custom {
-    background-color: transparent;
-    border: 2px solid #15D0FF;
-    color: #15D0FF;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    font-weight: bold;
+    background-color: transparent !important;
+    border: 2px solid #15D0FF !important;
+    color: #15D0FF !important;
+    padding: 1rem 2rem !important;
+    font-size: 1.2rem !important;
+    font-weight: bold !important;
     margin-right: 1rem;
     margin-bottom: 1rem;
     transition: all 0.3s ease;
     text-transform: uppercase;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .btn-primary-custom:hover, .btn-secondary-custom:hover {
