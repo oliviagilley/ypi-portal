@@ -22,6 +22,7 @@ body {
     color: white !important;
     min-height: 100vh;
     position: relative;
+    z-index: 2;
     overflow: hidden;
     padding: 0;
     margin: 0;
@@ -30,10 +31,12 @@ body {
 .landing-page .container-fluid {
     padding: 0;
     margin: 0;
+    position: relative;
+    z-index: 2;
 }
 
 .text-content {
-    padding: 2rem;
+    padding: 4rem;
 }
 
 .main-title {
@@ -42,6 +45,8 @@ body {
     font-weight: bold;
     margin-bottom: 1rem;
     text-align: left;
+    white-space: nowrap;
+    display: inline-block;
 }
 
 .tm-symbol {
@@ -104,17 +109,19 @@ body {
 
 .cars-section {
     position: absolute;
-    bottom: 0;
+    bottom: 10vh;
     left: 0;
     right: 0;
     text-align: center;
     padding: 2rem 0;
+    z-index: 1;
 }
 
 .cars-img {
-    max-width: 100%;
+    max-width: 120%;
     height: auto;
     opacity: 0.9;
+    margin-left: -10%;
 }
 
 /* Application Container (hidden by default) */
