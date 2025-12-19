@@ -22,7 +22,6 @@ body {
     color: white !important;
     min-height: 100vh;
     position: relative;
-    z-index: 2;
     overflow: hidden;
     padding: 0;
     margin: 0;
@@ -36,17 +35,17 @@ body {
 }
 
 .text-content {
-    padding: 4rem;
+    padding: 4rem !important;
 }
 
 .main-title {
-    color: #15D0FF;
-    font-size: 3.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    text-align: left;
-    white-space: nowrap;
-    display: inline-block;
+    color: #15D0FF !important;
+    font-size: 2.8rem !important;
+    font-weight: bold !important;
+    margin-bottom: 1rem !important;
+    text-align: left !important;
+    white-space: nowrap !important;
+    display: inline-block !important;
 }
 
 .tm-symbol {
@@ -108,20 +107,20 @@ body {
 }
 
 .cars-section {
-    position: absolute;
-    bottom: 10vh;
-    left: 0;
-    right: 0;
-    text-align: center;
-    padding: 2rem 0;
-    z-index: 1;
+    position: absolute !important;
+    bottom: 5vh !important;
+    left: 0 !important;
+    right: 0 !important;
+    text-align: center !important;
+    padding: 2rem 0 !important;
+    z-index: 1 !important;
 }
 
 .cars-img {
-    max-width: 120%;
-    height: auto;
-    opacity: 0.9;
-    margin-left: -10%;
+    max-width: 120% !important;
+    height: auto !important;
+    opacity: 0.9 !important;
+    margin-left: -10% !important;
 }
 
 /* Application Container (hidden by default) */
