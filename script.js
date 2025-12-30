@@ -95,9 +95,15 @@ function setupEventListeners() {
     document.getElementById('address-years').addEventListener('input', checkAddressDuration);
     document.getElementById('address-months').addEventListener('input', checkAddressDuration);
     
+    // Housing status change
+    document.getElementById('housing-status').addEventListener('change', updateHousingNotes);
+    
     // Employment time change
     document.getElementById('time-at-job-years').addEventListener('input', checkEmploymentDuration);
     document.getElementById('time-at-job-months').addEventListener('input', checkEmploymentDuration);
+    
+    // Hire date change
+    document.getElementById('hire-date').addEventListener('change', calculateJobTimeFromDate);
     
     // Add income source button
     document.getElementById('add-income-source').addEventListener('click', addIncomeSource);
@@ -318,16 +324,145 @@ function initializeStates() {
 
 // Update employment details based on employment status
 function updateEmploymentDetails() {
-    const employmentDetails = document.getElementById('employment-details');
     const employmentStatus = document.querySelector('input[name="employment-status"]:checked').value;
     
-    // In a real app, you would update the form fields based on the employment status
-    // For now, we'll just show/hide the employment details section
-    if (employmentStatus === 'retired' || employmentStatus === 'other-income') {
-        employmentDetails.style.display = 'none';
-    } else {
-        employmentDetails.style.display = 'block';
+    // Hide all sections first
+    document.getElementById('employed-section').classList.add('d-none');
+    document.getElementById('self-employed-section').classList.add('d-none');
+    document.getElementById('fixed-income-section').classList.add('d-none');
+    document.getElementById('other-income-section').classList.add('d-none');
+    
+    // Show relevant section
+    switch(employmentStatus) {
+        case 'employed':
+            document.getElementById('employed-section').classList.remove('d-none');
+            break;
+        case 'self-employed':
+            document.getElementById('self-employed-section').classList.remove('d-none');
+            break;
+        case 'fixed-income':
+            document.getElementById('fixed-income-section').classList.remove('d-none');
+            break;
+        case 'other-income':
+            document.getElementById('other-income-section').classList.remove('d-none');
+            break;
     }
+}
+
+// Update payment type fields
+function updatePaymentType() {
+    const paymentType = document.getElementById('payment-type').value;
+    
+    document.getElementById('hourly-section').classList.add('d-none');
+    document.getElementById('salary-section').classList.add('d-none');
+    
+    if (paymentType === 'hourly') {
+        document.getElementById('hourly-section').classList.remove('d-none');
+    } else if (paymentType === 'salary') {
+        document.getElementById('salary-section').classList.remove('d-none');
+    }
+}
+
+// Calculate hourly income
+function calculateHourlyIncome() {
+    const hourlyRate = parseFloat(document.getElementById('hourly-rate').value) || 0;
+    const hoursPerWeek = parseFloat(document.getElementById('hours-per-week').value) || 0;
+    const monthlyIncome = hourlyRate * hoursPerWeek * 4.33; // Average weeks per month
+    
+    document.getElementById('estimated-monthly-income').textContent = `$${monthlyIncome.toFixed(2)}`;
+}
+
+// Calculate salary income
+function calculateSalaryIncome() {
+    const salaryAmount = parseFloat(document.getElementById('salary-amount').value) || 0;
+    const salaryPeriod = document.getElementById('salary-period').value;
+    let monthlyIncome = 0;
+    
+    switch(salaryPeriod) {
+        case 'weekly':
+            monthlyIncome = salaryAmount * 4.33;
+            break;
+        case 'biweekly':
+            monthlyIncome = salaryAmount * 2.17;
+            break;
+        case 'monthly':
+            monthlyIncome = salaryAmount;
+            break;
+        case 'yearly':
+            monthlyIncome = salaryAmount / 12;
+            break;
+    }
+    
+    document.getElementById('estimated-salary-income').textContent = `$${monthlyIncome.toFixed(2)}`;
+}
+
+// Update co-applicant section
+function updateCoApplicantSection() {
+    const hasCoApplicant = document.querySelector('input[name="co-applicant"]:checked').value === 'yes';
+    
+    if (hasCoApplicant) {
+        document.getElementById('co-applicant-link-section').classList.remove('d-none');
+    } else {
+        document.getElementById('co-applicant-link-section').classList.add('d-none');
+    }
+}
+
+// Copy co-applicant link
+function copyCoApplicantLink() {
+    const linkInput = document.getElementById('co-applicant-link');
+    linkInput.select();
+    document.execCommand('copy');
+    
+    const copyBtn = document.getElementById('copy-link-btn');
+    const originalText = copyBtn.textContent;
+    copyBtn.textContent = 'Copied!';
+    copyBtn.classList.add('btn-success');
+    copyBtn.classList.remove('btn-outline-primary');
+    
+    setTimeout(() => {
+        copyBtn.textContent = originalText;
+        copyBtn.classList.remove('btn-success');
+        copyBtn.classList.add('btn-outline-primary');
+    }, 2000);
+}
+
+// Update submit button based on terms agreement
+function updateSubmitButton() {
+    const agreeTerms = document.getElementById('agree-terms').checked;
+    const submitBtn = document.getElementById('submit-application');
+    
+    submitBtn.disabled = !agreeTerms;
+}
+
+// Check employment duration and show previous employment if needed
+function checkEmploymentDuration() {
+    const years = parseInt(document.getElementById('time-at-job-years').value) || 0;
+    const months = parseInt(document.getElementById('time-at-job-months').value) || 0;
+    const totalMonths = (years * 12) + months;
+    
+    if (totalMonths < 24 && totalMonths > 0) {
+        document.getElementById('previous-employment-section').classList.remove('d-none');
+    } else {
+        document.getElementById('previous-employment-section').classList.add('d-none');
+    }
+}
+
+// Format SSN input
+function formatSSN(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    let formattedValue = '';
+    
+    if (value.length > 0) {
+        formattedValue = value.substring(0, 3);
+    }
+    if (value.length > 3) {
+        formattedValue += '-' + value.substring(3, 5);
+    }
+    if (value.length > 5) {
+        formattedValue += '-' + value.substring(5, 9);
+    }
+    
+    e.target.value = formattedValue;
 }
 
 // Navigate to a specific step
@@ -424,6 +559,87 @@ function submitApplication() {
     progressBar.setAttribute('aria-valuenow', 100);
 }
 
+// Calculate job time from hire date
+function calculateJobTimeFromDate() {
+    const hireDate = new Date(document.getElementById('hire-date').value);
+    const today = new Date();
+    
+    if (hireDate && hireDate <= today) {
+        const monthsDiff = (today.getFullYear() - hireDate.getFullYear()) * 12 + (today.getMonth() - hireDate.getMonth());
+        const years = Math.floor(monthsDiff / 12);
+        const months = monthsDiff % 12;
+        
+        document.getElementById('time-at-job-years').value = years;
+        document.getElementById('time-at-job-months').value = months;
+        
+        // Trigger the employment duration check
+        checkEmploymentDuration();
+    }
+}
+
+// Add additional income source with display
+function addIncomeSource() {
+    const incomeType = document.getElementById('additional-income-type').value;
+    const incomeAmount = document.getElementById('additional-income-amount').value;
+    
+    if (incomeType && incomeAmount) {
+        const incomeId = Date.now(); // Unique ID for this income source
+        formData.additionalIncome.push({
+            id: incomeId,
+            type: incomeType,
+            amount: parseFloat(incomeAmount)
+        });
+        
+        // Show the list section
+        document.getElementById('additional-income-list').style.display = 'block';
+        
+        // Add to the display list
+        const container = document.getElementById('income-sources-container');
+        const incomeItem = document.createElement('div');
+        incomeItem.className = 'alert alert-info d-flex justify-content-between align-items-center mb-2';
+        incomeItem.id = `income-${incomeId}`;
+        incomeItem.innerHTML = `
+            <span><strong>${incomeType}:</strong> $${parseFloat(incomeAmount).toFixed(2)}/month</span>
+            <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeIncomeSource(${incomeId})">Remove</button>
+        `;
+        container.appendChild(incomeItem);
+        
+        // Clear the input fields
+        document.getElementById('additional-income-type').value = '';
+        document.getElementById('additional-income-amount').value = '';
+        
+        // Show confirmation
+        const addBtn = document.getElementById('add-income-source');
+        const originalText = addBtn.textContent;
+        addBtn.textContent = 'Added!';
+        addBtn.classList.add('btn-success');
+        addBtn.classList.remove('btn-outline-primary');
+        
+        setTimeout(() => {
+            addBtn.textContent = originalText;
+            addBtn.classList.remove('btn-success');
+            addBtn.classList.add('btn-outline-primary');
+        }, 1500);
+    }
+}
+
+// Remove income source
+function removeIncomeSource(incomeId) {
+    // Remove from form data
+    formData.additionalIncome = formData.additionalIncome.filter(income => income.id !== incomeId);
+    
+    // Remove from display
+    const incomeElement = document.getElementById(`income-${incomeId}`);
+    if (incomeElement) {
+        incomeElement.remove();
+    }
+    
+    // Hide the list section if no income sources
+    if (formData.additionalIncome.length === 0) {
+        document.getElementById('additional-income-list').style.display = 'none';
+    }
+}
+
 // Start the application (from landing page)
 function startApplication() {
     document.getElementById('landing-page').classList.add('d-none');
@@ -433,3 +649,10 @@ function startApplication() {
     navigateTo(1);
 }
 
+// Show other options (placeholder for now)
+function showOtherOptions() {
+    alert('Other options coming soon! For now, please click "YES!" to continue with the application.');
+}
+
+// Initialize the application when the DOM is loaded
+document.addEventListener('DOMContentLoaded', init);

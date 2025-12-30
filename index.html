@@ -128,16 +128,6 @@
                         <label for="phone" class="form-label">Phone Number</label>
                         <input type="tel" class="form-control" id="phone" required>
                     </div>
-                    <div class="col-md-6">
-                        <label for="date-of-birth" class="form-label">Date of Birth</label>
-                        <input type="date" class="form-control" id="date-of-birth" required>
-                        <div class="form-text">We need this to verify your identity and ensure you meet age requirements.</div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="ssn" class="form-label">Social Security Number</label>
-                        <input type="text" class="form-control" id="ssn" placeholder="XXX-XX-XXXX" maxlength="11" required>
-                        <div class="form-text">Your SSN is encrypted and used only for credit verification. We never share this information.</div>
-                    </div>
                     <div class="col-12">
                         <label class="form-label">What type of identification do you have available?</label>
                         <div class="form-check">
@@ -157,6 +147,16 @@
                             <label class="form-check-label" for="other-id">Other</label>
                         </div>
                         <div class="form-text">💡 <strong>Helpful tip:</strong> A driver's license is NOT required to purchase a vehicle! We accept various forms of identification.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="date-of-birth" class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" id="date-of-birth" required>
+                        <div class="form-text">We need this to verify your identity and ensure you meet age requirements.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="ssn" class="form-label">Social Security Number</label>
+                        <input type="text" class="form-control" id="ssn" placeholder="XXX-XX-XXXX" maxlength="11" required>
+                        <div class="form-text">Your SSN is encrypted and kept secure. We never share your personal information.</div>
                     </div>
                 </div>
             </div>
@@ -204,7 +204,6 @@
                             <option value="family">Live with Friend or Family</option>
                             <option value="other">Other</option>
                         </select>
-                        <div class="form-text">💡 <strong>Helpful tip:</strong> Your living situation a bit more complicated? No worries! When unsure, just select "Other" and explain in the notes.</div>
                     </div>
                     <div class="col-md-4">
                         <label for="monthly-housing" class="form-label">Monthly Rent/Mortgage Amount</label>
@@ -222,21 +221,18 @@
                         <label for="time-at-address" class="form-label">Time at Address</label>
                         <div class="row g-2">
                             <div class="col-6">
+                                <label class="form-label">Years</label>
                                 <input type="number" class="form-control" id="address-years" placeholder="Years" min="0">
                             </div>
                             <div class="col-6">
+                                <label class="form-label">Months</label>
                                 <input type="number" class="form-control" id="address-months" placeholder="Months" min="0" max="11">
                             </div>
                         </div>
-                        <div class="form-text">How long have you lived at your current address?</div>
                     </div>
-                    <div class="col-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="lived-less-than-2-years">
-                            <label class="form-check-label" for="lived-less-than-2-years">
-                                I've lived at this address for less than 2 years
-                            </label>
-                        </div>
+                    <div class="col-12" id="housing-notes-section" style="display: none;">
+                        <label for="housing-notes" class="form-label">Please explain your housing situation</label>
+                        <textarea class="form-control" id="housing-notes" rows="3" placeholder="Please provide details about your living situation..."></textarea>
                     </div>
                 </div>
             </div>
@@ -344,12 +340,14 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="time-at-job-years" class="form-label">Time at Job</label>
+                            <label class="form-label">Time at This Job</label>
                             <div class="row g-2">
                                 <div class="col-6">
+                                    <label class="form-label">Years</label>
                                     <input type="number" class="form-control" id="time-at-job-years" placeholder="Years" min="0">
                                 </div>
                                 <div class="col-6">
+                                    <label class="form-label">Months</label>
                                     <input type="number" class="form-control" id="time-at-job-months" placeholder="Months" min="0" max="11">
                                 </div>
                             </div>
@@ -485,7 +483,7 @@
                 <div class="row g-3 mt-4">
                     <div class="col-12">
                         <h5>Additional Income Sources (Optional)</h5>
-                        <div class="form-text">💡 <strong>Helpful tip:</strong> Including all income sources can help you qualify for better financing options!</div>
+                        <div class="form-text">💡 <strong>Helpful tip:</strong> Including all income sources helps us find the best payment options for your budget!</div>
                     </div>
                     <div class="col-md-4">
                         <label for="additional-income-type" class="form-label">Income Type</label>
@@ -498,6 +496,10 @@
                     <div class="col-md-4">
                         <label class="form-label">&nbsp;</label>
                         <button type="button" class="btn btn-outline-primary w-100" id="add-income-source">Add Income Source</button>
+                    </div>
+                    <div class="col-12" id="additional-income-list" style="display: none;">
+                        <h6>Added Income Sources:</h6>
+                        <div id="income-sources-container"></div>
                     </div>
                 </div>
                 

@@ -102,7 +102,7 @@ body {
 }
 
 .logo-img {
-    max-height: 220px;
+    max-height: 280px;
     width: auto;
     object-fit: contain;
 }
@@ -110,8 +110,8 @@ body {
 .cars-container {
     background-color: #000000;
     text-align: center;
-    padding: 1rem 0;
-    margin-top: -2rem;
+    padding: 0.5rem 0;
+    margin-top: -4rem;
 }
 
 .cars-img {
