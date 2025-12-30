@@ -156,6 +156,7 @@ body {
 
 /* Vehicle Cards */
 .vehicle-card {
+    transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
     transition: all 0.3s ease;
     border: 2px solid transparent;
