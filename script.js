@@ -112,8 +112,42 @@ function setupEventListeners() {
     document.getElementById('ssn').addEventListener('input', formatSSN);
 }
 
-// Initialize the vehicle grid event listeners
+// Initialize the vehicle grid with sample data
 function initializeVehicleGrid() {
+    const vehicleGrid = document.getElementById('vehicle-grid');
+    
+    // Sample vehicle data (in a real app, this would come from an API)
+    const vehicles = [
+        { id: 1, make: 'Honda', model: 'Civic', year: 2023, price: 23950, image: 'https://via.placeholder.com/300x200?text=Honda+Civic' },
+        { id: 2, make: 'Toyota', model: 'Camry', year: 2023, price: 25945, image: 'https://via.placeholder.com/300x200?text=Toyota+Camry' },
+        { id: 3, make: 'Ford', model: 'F-150', year: 2023, price: 32990, image: 'https://via.placeholder.com/300x200?text=Ford+F150' },
+        { id: 4, make: 'Chevrolet', model: 'Equinox', year: 2023, price: 26995, image: 'https://via.placeholder.com/300x200?text=Chevrolet+Equinox' },
+        { id: 5, make: 'Nissan', model: 'Rogue', year: 2023, price: 27260, image: 'https://via.placeholder.com/300x200?text=Nissan+Rogue' },
+        { id: 6, make: 'Hyundai', model: 'Tucson', year: 2023, price: 25350, image: 'https://via.placeholder.com/300x200?text=Hyundai+Tucson' }
+    ];
+    
+    // Clear any existing content
+    vehicleGrid.innerHTML = '';
+    
+    // Add vehicles to the grid
+    vehicles.forEach(vehicle => {
+        const vehicleCard = document.createElement('div');
+        vehicleCard.className = 'col-md-4 mb-4';
+        vehicleCard.innerHTML = `
+            <div class="card vehicle-card" data-vehicle-id="${vehicle.id}">
+                <img src="${vehicle.image}" class="card-img-top" alt="${vehicle.year} ${vehicle.make} ${vehicle.model}">
+                <div class="card-body">
+                    <h5 class="card-title">${vehicle.year} ${vehicle.make} ${vehicle.model}</h5>
+                    <p class="card-text">Starting at $${vehicle.price.toLocaleString()}</p>
+                    <button class="btn btn-outline-primary select-vehicle">Select</button>
+                    <button class="btn btn-outline-secondary favorite-vehicle" style="display: none;">⭐ Favorite</button>
+                </div>
+            </div>
+        `;
+        
+        vehicleGrid.appendChild(vehicleCard);
+    });
+    
     // Add event listeners to the vehicle cards
     document.querySelectorAll('.vehicle-card').forEach(card => {
         card.addEventListener('click', (e) => {
