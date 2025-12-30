@@ -2,7 +2,7 @@
 const steps = document.querySelectorAll('.step');
 const progressBar = document.getElementById('progress-bar');
 let currentStep = 1;
-const totalSteps = 7;
+const totalSteps = 8;
 
 // Form Data Object
 const formData = {
@@ -12,7 +12,8 @@ const formData = {
     personalInfo: {},
     addressInfo: {},
     employmentInfo: {},
-    protectionOptions: {}
+    protectionOptions: {},
+    additionalIncome: []
 };
 
 // Initialize the application
@@ -43,6 +44,7 @@ function setupEventListeners() {
     document.getElementById('to-step-5').addEventListener('click', () => navigateTo(5));
     document.getElementById('to-step-6').addEventListener('click', () => navigateTo(6));
     document.getElementById('to-step-7').addEventListener('click', () => navigateTo(7));
+    document.getElementById('to-step-8').addEventListener('click', () => navigateTo(8));
     
     // Back buttons
     document.getElementById('back-to-1').addEventListener('click', () => navigateTo(1));
@@ -68,6 +70,40 @@ function setupEventListeners() {
     document.querySelectorAll('input[name="employment-status"]').forEach(radio => {
         radio.addEventListener('change', updateEmploymentDetails);
     });
+    
+    // Payment type change
+    document.getElementById('payment-type').addEventListener('change', updatePaymentType);
+    
+    // Income calculation
+    document.getElementById('hourly-rate').addEventListener('input', calculateHourlyIncome);
+    document.getElementById('hours-per-week').addEventListener('input', calculateHourlyIncome);
+    document.getElementById('salary-amount').addEventListener('input', calculateSalaryIncome);
+    document.getElementById('salary-period').addEventListener('change', calculateSalaryIncome);
+    
+    // Co-applicant
+    document.querySelectorAll('input[name="co-applicant"]').forEach(radio => {
+        radio.addEventListener('change', updateCoApplicantSection);
+    });
+    
+    // Copy link button
+    document.getElementById('copy-link-btn').addEventListener('click', copyCoApplicantLink);
+    
+    // Terms agreement
+    document.getElementById('agree-terms').addEventListener('change', updateSubmitButton);
+    
+    // Address time change
+    document.getElementById('address-years').addEventListener('input', checkAddressDuration);
+    document.getElementById('address-months').addEventListener('input', checkAddressDuration);
+    
+    // Employment time change
+    document.getElementById('time-at-job-years').addEventListener('input', checkEmploymentDuration);
+    document.getElementById('time-at-job-months').addEventListener('input', checkEmploymentDuration);
+    
+    // Add income source button
+    document.getElementById('add-income-source').addEventListener('click', addIncomeSource);
+    
+    // SSN formatting
+    document.getElementById('ssn').addEventListener('input', formatSSN);
 }
 
 // Initialize the vehicle grid with sample data
@@ -397,10 +433,3 @@ function startApplication() {
     navigateTo(1);
 }
 
-// Show other options (placeholder for now)
-function showOtherOptions() {
-    alert('Other options coming soon! For now, please click "YES!" to continue with the application.');
-}
-
-// Initialize the application when the DOM is loaded
-document.addEventListener('DOMContentLoaded', init);

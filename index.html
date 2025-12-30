@@ -128,6 +128,36 @@
                         <label for="phone" class="form-label">Phone Number</label>
                         <input type="tel" class="form-control" id="phone" required>
                     </div>
+                    <div class="col-md-6">
+                        <label for="date-of-birth" class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" id="date-of-birth" required>
+                        <div class="form-text">We need this to verify your identity and ensure you meet age requirements.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="ssn" class="form-label">Social Security Number</label>
+                        <input type="text" class="form-control" id="ssn" placeholder="XXX-XX-XXXX" maxlength="11" required>
+                        <div class="form-text">Your SSN is encrypted and used only for credit verification. We never share this information.</div>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">What type of identification do you have available?</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="id-type" id="drivers-license" value="drivers-license" checked>
+                            <label class="form-check-label" for="drivers-license">Driver's License</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="id-type" id="state-id" value="state-id">
+                            <label class="form-check-label" for="state-id">State ID</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="id-type" id="passport" value="passport">
+                            <label class="form-check-label" for="passport">Passport</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="id-type" id="other-id" value="other">
+                            <label class="form-check-label" for="other-id">Other</label>
+                        </div>
+                        <div class="form-text">💡 <strong>Helpful tip:</strong> A driver's license is NOT required to purchase a vehicle! We accept various forms of identification.</div>
+                    </div>
                 </div>
             </div>
             <div class="mt-4 d-flex justify-content-between">
@@ -145,20 +175,60 @@
                         <label for="street-address" class="form-label">Street Address</label>
                         <input type="text" class="form-control" id="street-address" required>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <label for="apt" class="form-label">Apt/Unit</label>
+                        <input type="text" class="form-control" id="apt">
+                    </div>
+                    <div class="col-md-4">
                         <label for="city" class="form-label">City</label>
                         <input type="text" class="form-control" id="city" required>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label for="state" class="form-label">State</label>
                         <select class="form-select" id="state" required>
                             <option value="">Select...</option>
                             <!-- States will be populated by JavaScript -->
                         </select>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label for="zip" class="form-label">ZIP Code</label>
                         <input type="text" class="form-control" id="zip" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="housing-status" class="form-label">Housing Status</label>
+                        <select class="form-select" id="housing-status" required>
+                            <option value="">Select...</option>
+                            <option value="rent">Rent</option>
+                            <option value="own-mortgage">Own with Mortgage</option>
+                            <option value="own-outright">Own Outright</option>
+                            <option value="family">Live with Friend or Family</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="form-text">💡 <strong>Helpful tip:</strong> Your living situation a bit more complicated? No worries! When unsure, just select "Other" and explain in the notes.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="monthly-housing" class="form-label">Monthly Rent/Mortgage Amount</label>
+                        <input type="number" class="form-control" id="monthly-housing" placeholder="If applicable">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="landlord-company" class="form-label">Landlord/Mortgage Company</label>
+                        <input type="text" class="form-control" id="landlord-company">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="landlord-phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="landlord-phone">
+                    </div>
+                    <div class="col-12">
+                        <label for="time-at-address" class="form-label">Time at Address</label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="number" class="form-control" id="address-years" placeholder="Years" min="0">
+                            </div>
+                            <div class="col-6">
+                                <input type="number" class="form-control" id="address-months" placeholder="Months" min="0" max="11">
+                            </div>
+                        </div>
+                        <div class="form-text">How long have you lived at your current address?</div>
                     </div>
                     <div class="col-12">
                         <div class="form-check">
@@ -170,6 +240,47 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Previous Address Section (hidden by default) -->
+            <div class="card p-4 mt-3 d-none" id="previous-address-section">
+                <h5 class="mb-3">Previous Address Information</h5>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label for="prev-street-address" class="form-label">Previous Street Address</label>
+                        <input type="text" class="form-control" id="prev-street-address">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="prev-apt" class="form-label">Apt/Unit</label>
+                        <input type="text" class="form-control" id="prev-apt">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="prev-city" class="form-label">City</label>
+                        <input type="text" class="form-control" id="prev-city">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="prev-state" class="form-label">State</label>
+                        <select class="form-select" id="prev-state">
+                            <option value="">Select...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="prev-zip" class="form-label">ZIP Code</label>
+                        <input type="text" class="form-control" id="prev-zip">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="prev-time-at-address" class="form-label">Time at Previous Address</label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="number" class="form-control" id="prev-address-years" placeholder="Years" min="0">
+                            </div>
+                            <div class="col-6">
+                                <input type="number" class="form-control" id="prev-address-months" placeholder="Months" min="0" max="11">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="mt-4 d-flex justify-content-between">
                 <button class="btn btn-outline-secondary" id="back-to-4">Back</button>
                 <button class="btn btn-primary" id="to-step-6">Next: Employment Information</button>
@@ -191,8 +302,8 @@
                         <label class="form-check-label" for="self-employed">Self-Employed</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="employment-status" id="retired" value="retired">
-                        <label class="form-check-label" for="retired">Retired</label>
+                        <input class="form-check-input" type="radio" name="employment-status" id="fixed-income" value="fixed-income">
+                        <label class="form-check-label" for="fixed-income">Fixed Income</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="employment-status" id="other-income" value="other-income">
@@ -200,7 +311,8 @@
                     </div>
                 </div>
                 
-                <div id="employment-details">
+                <!-- Employed Section -->
+                <div id="employed-section">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="employer" class="form-label">Employer Name</label>
@@ -210,13 +322,211 @@
                             <label for="job-title" class="form-label">Job Title</label>
                             <input type="text" class="form-control" id="job-title">
                         </div>
-                        <div class="col-md-6">
-                            <label for="monthly-income" class="form-label">Monthly Income ($)</label>
-                            <input type="number" class="form-control" id="monthly-income">
+                        <div class="col-md-4">
+                            <label for="hire-date" class="form-label">Hire Date</label>
+                            <input type="date" class="form-control" id="hire-date">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="employer-phone" class="form-label">Employer Phone</label>
+                            <input type="tel" class="form-control" id="employer-phone">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="employer-address" class="form-label">Work Address</label>
+                            <input type="text" class="form-control" id="employer-address" placeholder="Street address">
                         </div>
                         <div class="col-md-6">
-                            <label for="employment-years" class="form-label">Years at Current Job</label>
-                            <input type="number" class="form-control" id="employment-years" min="0" step="0.5">
+                            <label class="form-label">How are you paid?</label>
+                            <select class="form-select" id="payment-type">
+                                <option value="">Select...</option>
+                                <option value="hourly">Hourly</option>
+                                <option value="salary">Salary</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="time-at-job-years" class="form-label">Time at Job</label>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <input type="number" class="form-control" id="time-at-job-years" placeholder="Years" min="0">
+                                </div>
+                                <div class="col-6">
+                                    <input type="number" class="form-control" id="time-at-job-months" placeholder="Months" min="0" max="11">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hourly Payment Section -->
+                    <div class="row g-3 mt-3" id="hourly-section">
+                        <div class="col-md-4">
+                            <label for="hourly-rate" class="form-label">Hourly Rate ($)</label>
+                            <input type="number" class="form-control" id="hourly-rate" step="0.01">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="hours-per-week" class="form-label">Hours Per Week</label>
+                            <input type="number" class="form-control" id="hours-per-week" min="0" max="168">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Estimated Monthly Income</label>
+                            <div class="form-control-plaintext" id="estimated-monthly-income">$0</div>
+                            <div class="form-text">Based on your hourly rate and hours (before taxes)</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Salary Section -->
+                    <div class="row g-3 mt-3 d-none" id="salary-section">
+                        <div class="col-md-4">
+                            <label for="salary-amount" class="form-label">Salary Amount ($)</label>
+                            <input type="number" class="form-control" id="salary-amount">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="salary-period" class="form-label">Pay Period</label>
+                            <select class="form-select" id="salary-period">
+                                <option value="weekly">Weekly</option>
+                                <option value="biweekly">Bi-weekly</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="yearly">Yearly</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Estimated Monthly Income</label>
+                            <div class="form-control-plaintext" id="estimated-salary-income">$0</div>
+                            <div class="form-text">Based on your salary (before taxes)</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Document Upload -->
+                    <div class="row g-3 mt-3">
+                        <div class="col-12">
+                            <label for="paystub-upload" class="form-label">Upload Most Recent Pay Stub (Optional)</label>
+                            <input type="file" class="form-control" id="paystub-upload" accept=".pdf,.jpg,.jpeg,.png">
+                            <div class="form-text">💡 <strong>Helpful tip:</strong> Uploading your recent pay stub can help speed up the approval process!</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Self-Employed Section -->
+                <div class="row g-3 d-none" id="self-employed-section">
+                    <div class="col-md-6">
+                        <label for="business-name" class="form-label">Business Name</label>
+                        <input type="text" class="form-control" id="business-name">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="business-type" class="form-label">Type of Business/Work</label>
+                        <input type="text" class="form-control" id="business-type" placeholder="e.g., Construction, Consulting, Retail">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="monthly-business-income" class="form-label">Average Monthly Income (Past 3 months)</label>
+                        <input type="number" class="form-control" id="monthly-business-income">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="business-years" class="form-label">Years in Business</label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="number" class="form-control" id="business-years" placeholder="Years" min="0">
+                            </div>
+                            <div class="col-6">
+                                <input type="number" class="form-control" id="business-months" placeholder="Months" min="0" max="11">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="bank-deposit" class="form-label">Do you deposit business income into a checking account?</label>
+                        <select class="form-select" id="bank-deposit">
+                            <option value="">Select...</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="bank-statements-upload" class="form-label">Upload 3 Months Bank Statements</label>
+                        <input type="file" class="form-control" id="bank-statements-upload" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                        <div class="form-text">Please upload your last 3 months of bank statements to verify income.</div>
+                    </div>
+                </div>
+                
+                <!-- Fixed Income Section -->
+                <div class="row g-3 d-none" id="fixed-income-section">
+                    <div class="col-md-6">
+                        <label for="income-type" class="form-label">Income Type</label>
+                        <input type="text" class="form-control" id="income-type" placeholder="e.g., Social Security, Pension, Disability">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fixed-income-amount" class="form-label">Monthly Amount ($)</label>
+                        <input type="number" class="form-control" id="fixed-income-amount">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="income-duration-years" class="form-label">How long received?</label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="number" class="form-control" id="income-duration-years" placeholder="Years" min="0">
+                            </div>
+                            <div class="col-6">
+                                <input type="number" class="form-control" id="income-duration-months" placeholder="Months" min="0" max="11">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="income-statement-upload" class="form-label">Upload Recent Statement (Optional)</label>
+                        <input type="file" class="form-control" id="income-statement-upload" accept=".pdf,.jpg,.jpeg,.png">
+                        <div class="form-text">Upload your most recent statement showing this income.</div>
+                    </div>
+                </div>
+                
+                <!-- Other Income Section -->
+                <div class="row g-3 d-none" id="other-income-section">
+                    <div class="col-12">
+                        <label for="other-income-explanation" class="form-label">Please explain the sources of any income you receive, and how much you receive from it</label>
+                        <textarea class="form-control" id="other-income-explanation" rows="4" placeholder="e.g., Child support: $500/month, Part-time job: $800/month, etc."></textarea>
+                    </div>
+                </div>
+                
+                <!-- Additional Income Sources -->
+                <div class="row g-3 mt-4">
+                    <div class="col-12">
+                        <h5>Additional Income Sources (Optional)</h5>
+                        <div class="form-text">💡 <strong>Helpful tip:</strong> Including all income sources can help you qualify for better financing options!</div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="additional-income-type" class="form-label">Income Type</label>
+                        <input type="text" class="form-control" id="additional-income-type" placeholder="e.g., Child Support, Second Job">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="additional-income-amount" class="form-label">Monthly Amount ($)</label>
+                        <input type="number" class="form-control" id="additional-income-amount">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">&nbsp;</label>
+                        <button type="button" class="btn btn-outline-primary w-100" id="add-income-source">Add Income Source</button>
+                    </div>
+                </div>
+                
+                <!-- Previous Employment Section (hidden by default) -->
+                <div class="card p-3 mt-3 d-none" id="previous-employment-section">
+                    <h6 class="mb-3">Previous Employment Information</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="prev-employer" class="form-label">Previous Employer</label>
+                            <input type="text" class="form-control" id="prev-employer">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="prev-job-title" class="form-label">Previous Job Title</label>
+                            <input type="text" class="form-control" id="prev-job-title">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="prev-income" class="form-label">Previous Income ($)</label>
+                            <input type="number" class="form-control" id="prev-income">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="prev-employment-duration" class="form-label">Duration</label>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <input type="number" class="form-control" id="prev-years" placeholder="Years" min="0">
+                                </div>
+                                <div class="col-6">
+                                    <input type="number" class="form-control" id="prev-months" placeholder="Months" min="0" max="11">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -229,7 +539,7 @@
 
         <!-- Step 7: Protection Options -->
         <div class="step d-none" id="step7">
-            <h2 class="mb-4">Step 7: Protect Your Investment</h2>
+            <h2 class="mb-4">Step 7: Protection Options</h2>
             <div class="card p-4 mb-4">
                 <div class="mb-4">
                     <h5>Extended Warranty</h5>
@@ -238,7 +548,7 @@
                         <label class="form-check-label" for="extended-warranty">
                             Add Extended Warranty (+$49/month)
                         </label>
-                        <div class="form-text">Peace of mind with comprehensive coverage for unexpected repairs.</div>
+                        <div class="form-text">💡 <strong>Why most customers choose this:</strong> Unexpected repairs can cost thousands. Our warranty covers major components and gives you peace of mind. Most repairs pay for themselves in the first year!</div>
                     </div>
                 </div>
                 
@@ -249,7 +559,7 @@
                         <label class="form-check-label" for="gap-coverage">
                             Add GAP Coverage (+$25/month)
                         </label>
-                        <div class="form-text">Covers the difference between what you owe and your car's value if it's totaled.</div>
+                        <div class="form-text">💡 <strong>Smart protection for your investment:</strong> If your car is totaled or stolen, insurance only pays what it's worth (not what you owe). GAP covers the difference - protecting you from thousands in unexpected costs.</div>
                     </div>
                 </div>
                 
@@ -263,12 +573,62 @@
                         <span>With Selected Protections:</span>
                         <span id="total-payment-amount">$0</span>
                     </div>
+                    <div class="form-text mt-2">💡 <strong>Helpful tip:</strong> Many customers find that the monthly cost of protection is less than what they'd pay for just one unexpected repair!</div>
                 </div>
             </div>
             
             <div class="d-flex justify-content-between">
                 <button class="btn btn-outline-secondary" id="back-to-6">Back</button>
-                <button class="btn btn-success" id="submit-application">Submit Application</button>
+                <button class="btn btn-primary" id="to-step-8">Next: Final Steps</button>
+            </div>
+        </div>
+
+        <!-- Step 8: Final Steps and Identity Verification -->
+        <div class="step d-none" id="step8">
+            <h2 class="mb-4">Step 8: Final Steps - Verify Your Identity and Finalize Your Application!</h2>
+            
+            <!-- Co-applicant Section -->
+            <div class="card p-4 mb-4">
+                <h5 class="mb-3">Is there anyone else purchasing this vehicle with you?</h5>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="radio" name="co-applicant" id="no-co-applicant" value="no" checked>
+                    <label class="form-check-label" for="no-co-applicant">No, I'm the only purchaser</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="co-applicant" id="yes-co-applicant" value="yes">
+                    <label class="form-check-label" for="yes-co-applicant">Yes, someone else is purchasing with me</label>
+                </div>
+                
+                <div class="mt-3 d-none" id="co-applicant-link-section">
+                    <div class="alert alert-success">
+                        <h6>Great! Here's what to do next:</h6>
+                        <p class="mb-2">Copy and send this link to your co-applicant:</p>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="co-applicant-link" readonly value="https://oliviagilley.github.io/ypi-portal/co-applicant.html">
+                            <button class="btn btn-outline-primary" type="button" id="copy-link-btn">Copy Link</button>
+                        </div>
+                        <small class="form-text">This link will connect their application directly to yours as a co-applicant.</small>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Terms and Authorization -->
+            <div class="card p-4 mb-4">
+                <h5 class="mb-3">Application Authorization</h5>
+                <div class="form-text mb-3">
+                    <strong>By submitting this application, I certify that all information herein is true and complete. I agree I am providing this information to the dealer identified in this application and acknowledge that my information may be shared pursuant to the dealer's privacy policy, if applicable. I hereby authorize this dealer, and any financial institution engaged as a service provider by this dealer, to retain this application and to check and verify my credit, employment and salary history. By submitting this application, I acknowledge I am authorizing this dealer to check my credit.</strong>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="agree-terms" required>
+                    <label class="form-check-label" for="agree-terms">
+                        I agree to the terms and authorize credit check
+                    </label>
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-outline-secondary" id="back-to-7">Back</button>
+                <button class="btn btn-success" id="submit-application" disabled>Submit Application</button>
             </div>
         </div>
 
