@@ -102,7 +102,7 @@ body {
 }
 
 .logo-img {
-    max-height: 300px;
+    max-height: 220px;
     width: auto;
     object-fit: contain;
 }
@@ -110,8 +110,8 @@ body {
 .cars-container {
     background-color: #000000;
     text-align: center;
-    padding: 2rem 0;
-    margin-top: 1rem;
+    padding: 1rem 0;
+    margin-top: -2rem;
 }
 
 .cars-img {
@@ -186,6 +186,28 @@ body {
     color: var(--text-color) !important;
 }
 
+.form-text {
+    color: var(--text-color) !important;
+}
+
+.form-label {
+    color: var(--text-color) !important;
+}
+
+.card-title, .card-text {
+    color: var(--text-color) !important;
+}
+
+.alert-info {
+    background-color: #1a3a4a !important;
+    border-color: var(--primary-color) !important;
+    color: var(--text-color) !important;
+}
+
+.alert-info h6 {
+    color: var(--primary-color) !important;
+}
+
 .form-control:focus, .form-select:focus {
     border-color: var(--primary-color) !important;
     box-shadow: 0 0 0 0.25rem rgba(21, 208, 255, 0.25) !important;
@@ -253,6 +275,18 @@ body {
 .form-check-input:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 0.25rem rgba(74, 193, 247, 0.25);
+}
+
+.form-check-label {
+    color: var(--text-color) !important;
+}
+
+h2, h3, h4, h5, h6 {
+    color: var(--text-color) !important;
+}
+
+.step h2 {
+    color: var(--primary-color) !important;
 }
 
 /* Thank You Page */
