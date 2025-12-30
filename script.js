@@ -391,6 +391,7 @@ function submitApplication() {
 // Start the application (from landing page)
 function startApplication() {
     document.getElementById('landing-page').classList.add('d-none');
+    document.querySelector('.cars-container').classList.add('d-none');
     document.getElementById('application-container').classList.remove('d-none');
     currentStep = 1;
     navigateTo(1);
